@@ -1,5 +1,6 @@
 package project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +18,7 @@ public class Appointment {
     private Long id;
 
     @NotBlank(message = "doctor is required")
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
@@ -28,11 +29,19 @@ public class Appointment {
     @NotBlank(message = "appointment time is required")
     @Column(name = "appointment_time", nullable = false)
     @Future(message = "Appointment time must be in the future")
+    @JsonProperty("appointment_time")
     private LocalDateTime appointmentTime;
 
     @NotBlank(message = "status is required")
     @Column(nullable = false)
     private int status;
+    
+    @Column(length = 255)
+    @JsonProperty("reason_for_visit")
+    private String reasonForVisit;
+    
+    @Column(columnDefinition = "TEXT")
+    private String notes;
 
     
     // Helper methods
@@ -91,5 +100,21 @@ public class Appointment {
     
     public void setStatus(int status) {
         this.status = status;
+    }
+    
+    public String getReasonForVisit() {
+        return reasonForVisit;
+    }
+    
+    public void setReasonForVisit(String reasonForVisit) {
+        this.reasonForVisit = reasonForVisit;
+    }
+    
+    public String getNotes() {
+        return notes;
+    }
+    
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

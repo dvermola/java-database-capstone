@@ -1,5 +1,6 @@
 package project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +19,7 @@ public class Prescription {
     private String patientName;
     
     @NotNull(message = "Appointment ID is required")
+    @JsonProperty("appointment_id")
     private Long appointmentId;
     
     @NotBlank(message = "Medication name is required")
@@ -29,7 +31,16 @@ public class Prescription {
     private String dosage;
     
     @Size(max = 200, message = "Doctor notes must not exceed 200 characters")
+    @JsonProperty("doctor_notes")
     private String doctorNotes;
+    
+    @JsonProperty("refill_count")
+    private Integer refillCount;
+    
+    @Size(max = 30, message = "Pharmacy name must not exceed 30 characters")
+    @JsonProperty("pharmacy_name")
+    private String pharmacyName;
+    
     
     
     // Getters and Setters
@@ -79,5 +90,21 @@ public class Prescription {
     
     public void setDoctorNotes(String doctorNotes) {
         this.doctorNotes = doctorNotes;
+    }
+    
+    public Integer getRefillCount() {
+        return refillCount;
+    }
+    
+    public void setRefillCount(Integer refillCount) {
+        this.refillCount = refillCount;
+    }
+    
+    public String getPharmacyName() {
+        return pharmacyName;
+    }
+    
+    public void setPharmacyName(String pharmacyName) {
+        this.pharmacyName = pharmacyName;
     }
 }

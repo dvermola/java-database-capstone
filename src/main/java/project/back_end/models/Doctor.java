@@ -4,12 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "doctor")
@@ -20,7 +18,7 @@ public class Doctor {
     private Long id;
     
     @NotBlank(message = "Name is required")
-    @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
     private String name;
     
     @NotBlank(message = "Specialty is required")
@@ -32,7 +30,7 @@ public class Doctor {
     private String email;
     
     @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
+    @Size(min = 8, max = 50, message = "Password must be between 8 and 50 characters")
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
     
@@ -41,7 +39,23 @@ public class Doctor {
     private String phone;
 
     @ElementCollection
+    @JsonProperty("available_times")
     private List<String> availableTimes;
+
+    @Min(value = 0, message = "Years of experience must be at least 0")
+    @Max(value = 100, message = "Years of experience must be at most 100")
+    @JsonProperty("years_experience")
+    private Integer yearsOfExperience;
+    
+    @Size(max = 255, message = "Clinic address must be less than 255 characters")
+    @JsonProperty("clinic_address")
+    private String clinicAddress;
+
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "10.0")
+    @Column(precision = 3, scale = 1)
+    private Double rating;
+
 
 
     // Getters and Setters
@@ -100,5 +114,29 @@ public class Doctor {
     
     public void setAvailableTimes(List<String> availableTimes) {
         this.availableTimes = availableTimes;
+    }
+    
+    public Integer getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+    
+    public void setYearsOfExperience(Integer yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+    
+    public String getClinicAddress() {
+        return clinicAddress;
+    }
+    
+    public void setClinicAddress(String clinicAddress) {
+        this.clinicAddress = clinicAddress;
+    }
+    
+    public Double getRating() {
+        return rating;
+    }
+    
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 }
