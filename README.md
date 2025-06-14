@@ -9,3 +9,7 @@ The application should be able to manage data effectively and provide a user-fri
 
 ## Architecture Design Document
 [Architecture Design Document](schema-architecture.md)
+
+## User Stories
+[User Stories Document](user_stories.md)
+
