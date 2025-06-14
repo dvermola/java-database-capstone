@@ -7,3 +7,5 @@ The project requires development of a Java application that connects to a databa
 performs CRUD (Create, Read, Update, Delete) operations, and handles user input. 
 The application should be able to manage data effectively and provide a user-friendly interface.
 
+## Architecture Design Document
+[Architecture Design Document](schema-architecture.md)
