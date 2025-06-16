@@ -51,21 +51,43 @@ The system follows a clean layered architecture:
 
 ![architecture-diagram](architecture-diagram.png)
 
-1. User accesses AdminDashboard or Appointment pages - The user interacts with the system through either the web interface (Thymeleaf-based) for administrative functions or through the mobile applications using REST APIs. 
-This is the entry point for all system interactions.
+1. **User interface Layer**. 
+   Supports multiple user types and ways to interact with the system through either the web interface (Thymeleaf-based) 
+   for administrative functions or through the mobile applications using REST APIs.
+   - Web pages:
+     - AdminDashboard
+     - DoctorDashBoard
+   - REST API clients (apps):
+     - Appointments
+     - PatientDashboard
+     - PatientRecord
+   
+2. **Controller Layer**. 
+   As user interacts with the application request is routed to a back-end controller based on URL endpoint and method. 
+   - Requests for server-rendered views handled by Thymeleaf Controllers and return html pages based on .html templates with dynamic data and rendered by the browser.
+   - Requests from API consumer apps are handled by the REST Controllers. They process input, call back-end logic, and return responses with data in JSON.
 
-2. The action is routed to the appropriate Thymeleaf or REST controller - Depending on the access method, the request is directed to either a Thymeleaf controller (for web interface) or a REST controller (for API requests). The controllers handle the initial request processing and validation.
+3. **Service Layer**. 
+   Controllers delegate business logic processing to the service layer. 
+   The service layer contains the core business logic and orchestrates the operations needed to fulfill the request,  
+   coordinates workflows across multiple entities, and ensures separation between controller logic and fata access.
 
-3. The controller calls the service layer - Controllers delegate business logic processing to the service layer. The service layer contains the core business logic and orchestrates the operations needed to fulfill the request, including transaction management.
+4. **Repository Layer**. 
+   Repositories interact with the appropriate database - The system uses a polyglot persistence strategy with two 
+   specialized database engines:
+    - MySQL for structured relational data (patients, doctors, appointments)
+    - MongoDB for semi-structured flexible and netsed data for prescriptions
 
-4. Service layer processes business logic and calls repositories to retrive or persist data - The service layer implements business rules, performs validations, and coordinates data access operations. It interacts with the appropriate repositories to retrieve or modify data from the databases.
+6. **Model Binding**. Data retrieved from database is mapped to Java Model classes.
+   - @Entity - JPA repositories interact with relational MySQL database
+   - @Document - MongoDB repositories interact with document-oriented MongoDB.
 
-5. Repositories interact with the appropriate database - The system uses a polyglot persistence strategy with two specialized databases:
-    - JPA repositories interact with MySQL for structured relational data (patients, doctors, appointments)
 
-    - MongoDB repositories interact with MongoDB for semi-structured prescription data and medical documents
+7. **Application Models**. 
+   - In MVC flows models are passed from the controller to Thymeleaf templates and then rendered as dynamic html for the browser
+   - in REST flows models or transformed DTOs are serialized into JSON and sent back as part of the HTTP response
 
-6. Data is processed and transformed by appropriate data models - Repositories use domain-specific data models to abstract the underlying database implementation. These models decouple the application from the persistence layer. This abstraction allows for seamless transformation between database entities and business objects, enabling consistent data handling regardless of the storage mechanism (MySQL or MongoDB).
+11. Data is processed and transformed by appropriate data models - Repositories use domain-specific data models to abstract the underlying database implementation. These models decouple the application from the persistence layer. This abstraction allows for seamless transformation between database entities and business objects, enabling consistent data handling regardless of the storage mechanism (MySQL or MongoDB).
 
 7. Data persisited to the database using database specific objects - tables for relational database like MySQL or documents for MongoDB
 
