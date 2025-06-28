@@ -1,5 +1,12 @@
 package com.project.back_end.services;
 
+import com.project.back_end.models.Appointment;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Map;
+
+@org.springframework.stereotype.Service
 public class Service {
 // 1. **@Service Annotation**
 // The @Service annotation marks this class as a service component in Spring. This allows Spring to automatically detect it through component scanning
@@ -9,10 +16,22 @@ public class Service {
 // The constructor injects all required dependencies (TokenService, Repositories, and other Services). This approach promotes loose coupling, improves testability,
 // and ensures that all required dependencies are provided at object creation time.
 
-// 3. **validateToken Method**
-// This method checks if the provided JWT token is valid for a specific user. It uses the TokenService to perform the validation.
-// If the token is invalid or expired, it returns a 401 Unauthorized response with an appropriate error message. This ensures security by preventing
-// unauthorized access to protected resources.
+    public Service() {
+    }
+
+    /***
+     * This method checks if the provided JWT token is valid for a specific user. It uses the TokenService to perform the validation.
+     * If the token is invalid or expired, it returns a 401 Unauthorized response with an appropriate error message.
+     * This ensures security by preventing unauthorized access to protected resources.
+     * @param token
+     * @param doctor
+     * @return ?????????????
+     */
+    public ResponseEntity<Map<String, String>> validateToken(String token, String doctor) {
+        //TODO: implement
+        return null;
+    }
+
 
 // 4. **validateAdmin Method**
 // This method validates the login credentials for an admin user.
@@ -30,15 +49,22 @@ public class Service {
 // - If none of the filters are provided, it returns all available doctors.
 // This flexible filtering mechanism allows the frontend or consumers of the API to search and narrow down doctors based on user criteria.
 
-// 6. **validateAppointment Method**
-// This method validates if the requested appointment time for a doctor is available.
-// - It first checks if the doctor exists in the repository.
-// - Then, it retrieves the list of available time slots for the doctor on the specified date.
-// - It compares the requested appointment time with the start times of these slots.
-// - If a match is found, it returns 1 (valid appointment time).
-// - If no matching time slot is found, it returns 0 (invalid).
-// - If the doctor doesn’t exist, it returns -1.
-// This logic prevents overlapping or invalid appointment bookings.
+    /***
+     *  This method validates if the requested appointment time for a doctor is available. <br>
+     *  - It first checks if the doctor exists in the repository. <br>
+     *  - Then, it retrieves the list of available time slots for the doctor on the specified date. <br>
+     *  - It compares the requested appointment time with the start times of these slots. <br>
+     *  - If a match is found, it returns 1 (valid appointment time). <br>
+     *  - If no matching time slot is found, it returns 0 (invalid). <br>
+     *  This logic prevents overlapping or invalid appointment bookings.
+     * @param appointment
+     * @return If the doctor doesn’t exist, it returns -1. <br>
+     */
+    public int validateAppointment(@Valid Appointment appointment) {
+        //TODO: implement
+        return -1;
+    }
+
 
 // 7. **validatePatient Method**
 // This method checks whether a patient with the same email or phone number already exists in the system.

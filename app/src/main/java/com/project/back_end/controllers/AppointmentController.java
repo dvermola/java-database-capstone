@@ -40,12 +40,12 @@ public class AppointmentController {
     public ResponseEntity<Map <String,Object>> getAppointments(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @PathVariable String patientName,@PathVariable String token)
     {
         Map<String, Object> map = new HashMap<>();
-        ResponseEntity<Map<String,String>> tempMap= service.validateToken(token, "doctor");
+        ResponseEntity<Map<String,String>> tempMap = service.validateToken(token, "doctor");
         if (!tempMap.getBody().isEmpty()) {
             map.putAll(tempMap.getBody());
             return new ResponseEntity<>(map, tempMap.getStatusCode());
         }
-        map=appointmentService.getAppointment(patientName, date, token);
+        map = appointmentService.getAppointment(patientName, date, token);
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
     
