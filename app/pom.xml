@@ -13,22 +13,35 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>back-end</name>
 	<description>Demo project for Spring Boot</description>
+
 	<url/>
+
 	<licenses>
 		<license/>
 	</licenses>
+
 	<developers>
-		<developer/>
+		<developer>
+			<id>de</id>
+			<name>Dmitry Ermolaev</name>
+			<email>dmitry.v.ermolaev@us.ibm.com</email>
+			<roles>
+				<role>principal developer</role>
+			</roles>
+		</developer>
 	</developers>
+
 	<scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
 		<url/>
 	</scm>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 
 	    <dependency>
@@ -70,32 +83,35 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.12.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.6</version>
+		</dependency>
 
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-api</artifactId>
-    <version>0.12.6</version>
-</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.6</version>
+			<scope>runtime</scope>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-impl</artifactId>
-    <version>0.12.6</version>
-    <scope>runtime</scope>
-</dependency>
-
-<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-jackson</artifactId>
-    <version>0.12.6</version>
-    <scope>runtime</scope>
-</dependency>
-	
-
-		</dependencies>
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.6</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
