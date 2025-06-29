@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.Set;
 
@@ -33,8 +34,8 @@ public class Doctor extends BasePerson {
     private String specialty;
 
     // Doctor's phone number.
-    @Pattern(regexp = "^[0-9]{10}$") // validates that the phone number must be exactly 10 digits long.
-    @Column(nullable = false, length = 10)
+    @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$") // validates that the phone number must be exactly 12 digits long.
+    @Column(nullable = false, length = 12)
     @NotNull
     private String phone;
 
@@ -49,6 +50,7 @@ public class Doctor extends BasePerson {
     // field is_active to deactivate patients without deleting them to keep history records
     @Column(nullable = false)
     @JsonProperty("is_active")
+    @ColumnDefault("true")
     private boolean isActive;
 
     public Doctor() {

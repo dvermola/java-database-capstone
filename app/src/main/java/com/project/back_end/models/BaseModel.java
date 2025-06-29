@@ -3,6 +3,7 @@ package com.project.back_end.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDateTime;
 
@@ -15,11 +16,11 @@ public abstract class BaseModel {
     protected Long id;
 
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false, columnDefinition = "DATETIME DEFAULT NOW()")
     protected final LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false, columnDefinition = "DATETIME DEFAULT NOW() ON UPDATE NOW()")
     protected LocalDateTime updatedAt;
 
     public BaseModel() {
