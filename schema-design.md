@@ -12,7 +12,6 @@
 - email VARCHAR(100), NOT NULL, UNIQUE  -- prevent from same email shared by several patients to increase quality of data
 - password VARCHAR(512), NOT NULL       -- Stored as hashed value
 - name VARCHAR(100), NOT NULL
-- date_of_birth DATE, NOT NULL
 - phone VARCHAR(10), NOT NULL
 - address VARCHAR(255), NOT NULL
 - is_active BOOLEAN DEFAULT TRUE,    -- deactivate patients without deleting them to keep history records
@@ -55,14 +54,14 @@ CHECK (end_time > start_time)
 
 ### Collection: prescriptions
 {
-  "_id": ObjectId("60d21b4667d0d8992e610c85"),
+  "id": ObjectId("60d21b4667d0d8992e610c85"),
   "patientName": "John Doe",
   "appointment_id": 789,
   "diagnosis": "Seasonal allergic rhinitis",
   "medication": "Loratadine",
   "dosage": "10mg",
   "doctorNotes": "Patient reports worsening symptoms during spring season. Take Loratadine in the morning with or without food",
-  "created_at": ISODate("2023-06-15T10:30:00Z"),
-  "updated_at": ISODate("2023-06-15T10:30:00Z")
+  "createdAt": ISODate("2023-06-15T10:30:00Z"),
+  "updatedAt": ISODate("2023-06-15T10:30:00Z")
 }
 

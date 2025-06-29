@@ -1,59 +1,100 @@
 package com.project.back_end.models;
 
-public class Patient {
-// @Entity annotation:
-//    - Marks the class as a JPA entity, meaning it represents a table in the database.
-//    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-// 1. 'id' field:
-//    - Type: private Long
-//    - Description:
-//      - Represents the unique identifier for each patient.
-//      - The @Id annotation marks it as the primary key.
-//      - The @GeneratedValue(strategy = GenerationType.IDENTITY) annotation auto-generates the ID value when a new record is inserted into the database.
+@Entity
+public class Patient extends BasePerson {
 
-// 2. 'name' field:
-//    - Type: private String
-//    - Description:
-//      - Represents the patient's full name.
-//      - The @NotNull annotation ensures that the patient's name is required.
-//      - The @Size(min = 3, max = 100) annotation ensures that the name length is between 3 and 100 characters. 
-//      - Provides validation for correct input and user experience.
+    // id inherited from BaseModel
+    // password inherited from BasePerson
 
+    // Patient's full name.
+    @Column(nullable = false, length = 100)
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String name;
 
-// 3. 'email' field:
-//    - Type: private String
-//    - Description:
-//      - Represents the patient's email address.
-//      - The @NotNull annotation ensures that an email address must be provided.
-//      - The @Email annotation validates that the email address follows a valid email format (e.g., patient@example.com).
+    // Patient's email address.
+    @Column(unique = true, nullable = false, length = 100)
+    @Email // validates that the email address follows a valid email format (e.g., patient@example.com).
+    @NotNull
+    @Size(max = 100)
+    private String email;
 
-// 4. 'password' field:
-//    - Type: private String
-//    - Description:
-//      - Represents the patient's password for login authentication.
-//      - The @NotNull annotation ensures that a password must be provided.
-//      - The @Size(min = 6) annotation ensures that the password must be at least 6 characters long.
+    // Patient's phone number.
+    @Pattern(regexp = "^[0-9]{10}$") // validates that the phone number must be exactly 10 digits long.
+    @Column(nullable = false, length = 10)
+    @NotNull
+    private String phone;
 
-// 5. 'phone' field:
-//    - Type: private String
-//    - Description:
-//      - Represents the patient's phone number.
-//      - The @NotNull annotation ensures that a phone number must be provided.
-//      - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone number must be exactly 10 digits long.
+    // Patient's address.
+    @Column(nullable = false, length = 255)
+    @NotNull
+    @Size(max = 255)
+    private String address;
 
-// 6. 'address' field:
-//    - Type: private String
-//    - Description:
-//      - Represents the patient's address.
-//      - The @NotNull annotation ensures that the address must be provided.
-//      - The @Size(max = 255) annotation ensures that the address does not exceed 255 characters in length, providing validation for the address input.
+    // field is_active to deactivate patients without deleting them to keep history records
+    @Column(nullable = false)
+    @JsonProperty("is_active")
+    private boolean isActive;
 
+    public Patient() {
+        super();
+        isActive = true;
+    }
 
-// 7. Getters and Setters:
-//    - Standard getter and setter methods are provided for all fields: id, name, email, password, phone, and address.
-//    - These methods allow access and modification of the fields of the Patient class.
+    public Patient(String name, String email, String password, String phone, String address) {
+        this();
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
 
-  
+    // Standard getter and setter methods are provided for all fields: id, name, email, password, phone, and address.
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
