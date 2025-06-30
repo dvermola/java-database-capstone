@@ -28,10 +28,11 @@
 
   Step 2: Check if the response is not OK
     - If not, parse the error JSON and throw a descriptive error
-*/
+
   Step 3: If successful, parse the response JSON
     - This will contain the prescription object
 
   Step 4: Return the prescription data
 
   Step 5: Catch and log any errors, and rethrow them so the caller can handle them
+*/
