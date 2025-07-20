@@ -3,50 +3,50 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>CMS main page</title>
+    <title>CMS</title>
 
-    <link rel="icon" href="assets/images/logo/logo.png">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="./assets/images/logo/logo.png">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
-<!--    <script src="/js/util.js" defer></script>-->
-<!--    <script src="/js/render.js" defer></script>-->
+    <script src="/js/util.js" defer></script>
+    <script src="/js/render.js" defer></script>
 </head>
-<body>
+<body onload="renderContent()">
     <div class="container">
         <div class="wrapper">
             <div id="header">
-                <header>
-                    <script src="js/components/header.js" defer></script>
-                </header>
             </div>
+
             <main class="main-content">
                 <h2>Select Your Role</h2>
 
                 <div class="role-buttons">
-                    <button id="admin-btn" onclick="setRole('admin')">Admin</button>
-                    <button id="patient-btn" onclick="setRole('patient')">Patient</button>
-                    <button id="doctor-btn" onclick="setRole('doctor')">Doctor</button>
+                    <button id="adminLogin" onclick="setRole('admin')">Admin</button>
+                    <button id="patientLogin" onclick="setRole('patient')">Patient</button>
+                    <button id="doctorLogin" onclick="setRole('doctor')">Doctor</button>
                 </div>
-            </main>
-            <div id="footer">
-                <footer>
-                    <div id="footer-content">
-                        <script src="js/components/footer.js" defer></script>
+
+                <!-- Modal for Login-->
+                <div id="modal" class="modal" hidden="hidden">
+                    <div class="modal-content">
+                        <div id="modal-body"></div>
+                        <script type="module" src="/js/components/modals.js" defer></script>
+                        <button id="closeModal" class="close-btn">&times;</button>
                     </div>
-                </footer>
+                </div>
+
+            </main>
+
+            <div id="footer">
             </div>
         </div>
     </div>
 
-    <div id="modal" class="modal" hidden="hidden">
-        <div class="modal-container">
-            <button id="closeModal" class="close-btn">&times;</button>
-            <div id="modal-body"></div>
-            <script type="module" src="js/components/modals.js" defer></script>
-        </div>
-    </div>
+
     <script type="module" src="js/services/index.js" defer></script>
+    <script src="js/components/header.js" defer></script>
+    <script src="js/components/footer.js" defer></script>
 </body>
 </html>
 <!--

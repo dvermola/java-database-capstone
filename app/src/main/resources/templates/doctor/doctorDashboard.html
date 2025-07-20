@@ -3,8 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>DoctorDashboard</title>
     <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
-    <title>CMS Doctor Dashboard</title>
 
     <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" />
     <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}" />
@@ -12,24 +12,32 @@
 
     <script th:src="@{/js/render.js}" defer></script>
     <script th:src="@{/js/util.js}" defer></script>
+
     <script th:src="@{/js/components/header.js}" defer></script>
     <script th:src="@{/js/components/footer.js}" defer></script>
+    <script th:src="@{/js/components/patientRecordRow.js}" defer></script>
 
+    <script th:src="@{/js/services/patientServices.js}" defer></script>
     <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
 </head>
+
 <body onload="renderContent()">
     <div class="container">
         <div class="wrapper">
-            <div id="header"></div>
+            <div id="header">
+            </div>
             <div class="main-content">
+                <label for="searchBar"></label>
                 <input type="text" id="searchBar" class="searchBar" placeholder="Search Bar for custom output" />
                 
                 <div class="filter-controls">
                     <button id="todayButton" class="btn">Today's Appointments</button>
+
+                    <label for="datePicker">Select Date</label>
                     <input type="date" id="datePicker" class="date-picker" />
                 </div>
                 
-                <table class="patient-table">
+                <table id="patientTable" class="patient-table">
                     <thead>
                         <tr>
                             <th>Patient ID</th>
@@ -42,7 +50,9 @@
                     <tbody id="patientTableBody"></tbody>
                 </table>
             </div>
-            <div id="footer"></div>
+
+            <div id="footer">
+            </div>
         </div>
     </div>
 </body>

@@ -10,22 +10,28 @@
 
     <script th:src="@{/js/render.js}" defer></script>
     <script th:src="@{/js/util.js}" defer></script>
+
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
 </head>
-<body onload="renderContent()">
+<body>
     <div class="container">
         <div class="wrapper">
             <div id="header">
-                <header>
-                    <script th:src="@{/js/components/header.js}" defer></script>
-                </header>
             </div>
+
             <main class="main-content">
+                <label for="searchBar"></label>
                 <input type="text" id="searchBar" placeholder="search by doctor name" />
+
+                <label for="timeFilter"> </label>
                 <select id="timeFilter">
                     <option value="">All Times</option>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                 </select>
+
+                <label for="specialtyFilter"> </label>
                 <select id="specialtyFilter">
                     <option value="">All Specialties</option>
                     <option value="Cardiologist">Cardiologist</option>
@@ -34,24 +40,23 @@
                     <option value="Neurologist">Neurologist</option>
                     <option value="Pediatrician">Pediatrician</option>
                 </select>
-                <div id="content"> <!-- dynamic injection of doctor cards or data.--> </div>
+
+                <div id="content"> <!-- dynamic injection of doctor cards or data.-->
+                </div>
             </main>
+
             <div id="footer">
-                <footer>
-                    <div id="footer-content">
-                        <script th:src="@{/js/components/footer.js}" defer></script>
-                    </div>
-                </footer>
             </div>
         </div>
     </div>
-    <div id="modal" class="modal" hidden="hidden">
+
+    <div id="modal" class="modal">
         <span id="closeModal" class="close">&times;</span>
-        <div id="modal-body">
-            <script type="module" src="../js/services/adminDashboard.js" defer></script>
-            <script type="module" src="../js/components/doctorCard.js" defer></script>
-        </div>
+        <div id="modal-body"></div>
     </div>
+
+    <script type="module" src="/js/adminDashboard.js" defer></script>
+    <script type="module" src="/js/doctorDashboard.js" defer></script>
 </body>
 </html>
 
