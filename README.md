@@ -1,4 +1,4 @@
-# Java Database Application Project
+# Smart Clinic Management System
 This project is part of the [IBM Java Developer Professional Certificate](https://www.coursera.org/professional-certificates/java-developer) on Coursera. 
 It involves creating a simple Java application that interacts with a database, demonstrating skills in Java programming, database management, and application development.
 
