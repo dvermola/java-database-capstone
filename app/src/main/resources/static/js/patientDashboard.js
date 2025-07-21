@@ -1,45 +1,52 @@
+// This script handles the patient dashboard functionalities including loading doctor cards
+
 import { createDoctorCard } from './components/doctorCard.js';
 import { openModal } from './components/modals.js';
 import { filterDoctors, getDoctors } from './services/doctorServices.js';
 import { patientLogin, patientSignup } from './services/patientServices.js';
 
-
-
+// Load Doctor Cards on Page Load
 document.addEventListener("DOMContentLoaded", () => {
-  loadDoctorCards();
+    console.log("Loading Doctor Cards...");
+    loadDoctorCards();
 });
 
+//
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("patientSignup");
-  if (btn) {
-    btn.addEventListener("click", () => openModal("patientSignup"));
-  }
+    const btn = document.getElementById("patientSignup");
+    if (btn) {
+        console.log("Patient Signup Button Found and assigned");
+        btn.addEventListener("click", () => openModal("patientSignup"));
+    } else {
+        console.log("ERR: Patient Signup Button Not Found");
+    }
 });
 
 document.addEventListener("DOMContentLoaded", ()=> {
-  const loginBtn = document.getElementById("patientLogin")
-  if(loginBtn){
-    loginBtn.addEventListener("click" , ()=> {
-      openModal("patientLogin")
-    })
-  }
+    const loginBtn = document.getElementById("patientLogin")
+    if(loginBtn){
+        loginBtn.addEventListener("click" , ()=> {
+            openModal("patientLogin")
+        })
+    }
 })
 
 function loadDoctorCards() {
-  getDoctors()
-    .then(doctors => {
-      const contentDiv = document.getElementById("content");
-      contentDiv.innerHTML = ""; 
+    getDoctors()
+        .then(doctors => {
+            const contentDiv = document.getElementById("content");
+            contentDiv.innerHTML = "";
 
-      doctors.forEach(doctor => {
-        const card = createDoctorCard(doctor);
-        contentDiv.appendChild(card);
-      });
-    })
-    .catch(error => {
-      console.error("Failed to load doctors:", error);
-    });
+            doctors.forEach(doctor => {
+                const card = createDoctorCard(doctor);
+                contentDiv.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load doctors:", error);
+        });
 }
+
 // Filter Input
 document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
 document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);

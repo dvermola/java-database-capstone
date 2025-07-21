@@ -1,4 +1,22 @@
 // modals.js
+/**
+ * @file modals.js
+ * @description Provides the `openModal` function to dynamically generate and display modal content
+ * based on the specified type. Includes event listeners for modal-specific actions.
+ */
+
+/**
+ * @function openModal
+ * @description Dynamically generates and displays modal content based on the provided type.
+ * Adds event listeners for specific modal actions such as login, signup, or adding a doctor.
+ *
+ * @param {string} type - The type of modal to display. Supported types include:
+ * - 'addDoctor': Displays a form to add a doctor.
+ * - 'patientLogin': Displays a login form for patients.
+ * - 'patientSignup': Displays a signup form for patients.
+ * - 'adminLogin': Displays a login form for admins.
+ * - 'doctorLogin': Displays a login form for doctors.
+ */
 export function openModal(type) {
   let modalContent = '';
   if (type === 'addDoctor') {
@@ -44,8 +62,7 @@ export function openModal(type) {
         <input type="password" id="password" placeholder="Password" class="input-field">
         <button class="dashboard-btn" id="loginBtn">Login</button>
       `;
-  }
-  else if (type === "patientSignup") {
+  } else if (type === "patientSignup") {
     modalContent = `
       <h2>Patient Signup</h2>
       <input type="text" id="name" placeholder="Name" class="input-field">
@@ -55,7 +72,6 @@ export function openModal(type) {
       <input type="text" id="address" placeholder="Address" class="input-field">
       <button class="dashboard-btn" id="signupBtn">Signup</button>
     `;
-
   } else if (type === 'adminLogin') {
     modalContent = `
         <h2>Admin Login</h2>
